@@ -2,7 +2,7 @@
 session_start();
 
 // Conexión a la base de datos
-$con = mysqli_connect('localhost', 'root', '', 'auroluxe');
+$con = mysqli_connect('10.43.99.186', 'root', '', 'auroluxe');
 if (!$con) {
     die("Connection failed: " . mysqli_connect_error());
 }

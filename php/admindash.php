@@ -36,41 +36,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="assets/css/stylesda.css" rel="stylesheet">
-
+    <title>AuroLuxe Mainpage</title>
+    <link rel="stylesheet" href="assets/css/mainpage.css">
+    <script src="assets/js/script_prot.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Admin Dashboard</h2>
-        <h4>Welcome</h4>
-
-        <!-- Form to Add New User -->
-        <form action="admindash.php" method="POST">
-            <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
-                <input type="text" name="name" id="name" class="form-control" required>
+    
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="profile">
+                <img src="assets/images/Genericavatar.png" alt="avatar" class="avatar">
+                <p class="username">username</p>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" id="email" class="form-control" required>
+            <nav>
+                <ul>
+                    <li>Usuarios Comunes</li>
+                    <li>Agregar Usuarios</li>
+                </ul>
+            </nav>
+            <img src="assets/images/Logo.png" alt="AuroLuxe Logo" class ="logo">
+        </div>
+        <div class="main">
+            <h1>ÁREAS</h1>
+            <div class="list">
+                <h2>Lista</h2>
+                <ul>
+                    <li>Sala</li>
+                    <li>Dormitorio</li>
+                </ul>
             </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" id="password" class="form-control" required>
-            </div>
-            <div class="mb-3">
-                <label for="role" class="form-label">Role</label>
-                <select name="role" id="role" class="form-select" required>
-                    <option value="user">User</option>
-                    <option value="admin">Admin</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Add User</button>
-        </form>
+            <button class="add-area">AGREGAR ÁREA<span>+</span></button>
+        </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
