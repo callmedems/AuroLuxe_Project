@@ -13,11 +13,17 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
 $query = "SELECT * FROM users"; // Cambia la tabla 'users' si es diferente
 $result = mysqli_query($con, $query);
 if ($result) {
-    // Obtener todos los usuarios en un array asociativo
-    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    echo "Consulta exitosa<br>"; 
+    $users = mysqli_fetch_all($result, MYSQLI_ASSOC);}
+
+$query1 = "SELECT * FROM areas"; // Consulta para obtener todas las áreas
+$result1= mysqli_query($con, $query1);
+if ($result1) {
+    $areas = mysqli_fetch_all($result1, MYSQLI_ASSOC); // Obtén las áreas como un array asociativo
 } else {
-    $users = []; // Si la consulta falla, asigna un array vacío a $users
+    $areas = []; // Si no hay áreas o hay un error, asigna un array vacío
 }
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $con = mysqli_connect('localhost', 'root', '', 'auroluxe');
     if (!$con) {
@@ -84,6 +90,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <!-- Contenido Principal -->
             <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
                 <h4>Welcome, admin </h4>
+                <ul class="nav flex-column ms-3">
+    <?php foreach ($areas as $area): ?>
+        <li class="nav-item">
+            <a class="nav-link" href="areas.php?id=<?= $area['id'] ?>"><?= htmlspecialchars($area['area']) ?></a>
+
+        </li>
+    <?php endforeach; ?>
+</ul>
 
 
                 <!-- Formulario para agregar un nuevo usuario -->
