@@ -16,9 +16,10 @@ body {
 }
 
 .logo {
-    width: 300px;
-    position: absolute;
-    top: -30%;
+    width: 40%;
+    position: relative;
+    /*margin-bottom: 20px;*/
+    z-index: 1;
 }
 
 #home .container {
@@ -34,8 +35,8 @@ body {
 
 #home h1 {
     color: #fff;
-    font-size: 40px;
-    margin-top: 100px;
+    font-size: 80px;
+    margin-top: 10px;
 }
 
 #home button {

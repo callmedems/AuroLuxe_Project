@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AuroLuxe Login</title>
     <link rel="stylesheet" href="assets/css/estyle.css">
+    <script src="assets/js/script_prot.js"></script>
 </head>
 
 <body>
@@ -17,14 +18,12 @@
                  <form id="loginForm" method="POST" action="php/log_data.php">
                     <input type="email" name="email" placeholder="Email address" required>
                     <input type="password" name="password" placeholder="Enter password" required>
-                    <button type="submit">Next</button>
+                    <button type="submit" onclick="navigateTo('mainpage')">Next</button>
                 </form>
                 
             </form>
             <p>New to AuroLuxe? <a href="signup.html" onclick="navigateTo('signup')">SIGN UP!</a></p>
         </div>
     </section>
-
-    <script src="assets/js/script_prot.js"></script>
 </body>
 </html>
