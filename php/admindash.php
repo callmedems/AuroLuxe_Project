@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (mysqli_query($con, $insert_query)) {
         echo "<div class='alert alert-success'>User added successfully</div>";
-    } else {
+    }else {
         echo "<div class='alert alert-danger'>Error: " . mysqli_error($con) . "</div>";
     }
 
@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="assets/css/stylesda.css" rel="stylesheet">
->
+
 </head>
 <body>
     <div class="container mt-5">
