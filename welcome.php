@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
                         <button 
                             class="btn btn-outline-primary mb-2" 
                             id="area-<?php echo $area['id']; ?>" 
-                            onclick="location.href='admin_dashboard.php?area_id=<?php echo $area['id']; ?>'">
+                            onclick="location.href='admin_dashboard.php'">
                             <?php echo htmlspecialchars($area['area']); ?>
                         </button>
                         <!-- Botones de encender/apagar -->

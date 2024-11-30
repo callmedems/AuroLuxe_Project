@@ -36,6 +36,97 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - AuroLuxe</title>
     <link rel="stylesheet" href="assets/css/admin_dashboard.css">
+    <style>
+        body {
+    font-family: 'Lucida Sans Bold', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+h1, h2 {
+    color: #444;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: #555;
+}
+
+table thead {
+    background-color: #8c44a8;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #fff;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+a {
+    display: inline-block;
+    margin: 10px 5px;
+    text-decoration: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #8c44a8;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+a:hover {
+    background-color: #8c44a8;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    h1, h2 {
+        font-size: 20px;
+    }
+
+    a {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
+
+    </style>
 </head>
 <body>
     <!-- Admin Dashboard Section -->
