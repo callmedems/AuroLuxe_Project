@@ -18,6 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         echo "<div class='alert alert-danger'>Error: " . mysqli_error($con) . "</div>";
     }
 
+
     // Cerrar la conexión
     mysqli_close($con);
 }
