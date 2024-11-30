@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AuroLuxe Admin Dashboard</title>
+    <title>AuroLuxe Mainpage</title>
     <link rel="stylesheet" href="assets/css/welcome.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
@@ -43,8 +43,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
     <div class="dashboard">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="profile">
-                <img src="assets/images/Genericavatar.png" alt="User   Avatar" class="avatar">
+            <div class="profile text-center">
+                <img src="assets/images/Genericavatar.png" alt="User Avatar" class="avatar">
                 <p class="username"><?php echo $_SESSION['name']; ?></p>
             </div>
             <nav class="nav flex-column">
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
                         Usuario Administrador
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">AdminUser  </a></li>
+                        <li><a class="dropdown-item" href="#">AdminUser</a></li>
                     </ul>
                 </div>
             </nav>
@@ -62,23 +62,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
 
         <!-- Main Content -->
         <main class="main">
-            <p>ÁREAS</p>
+            <h1 class="text-center">ÁREAS</h1>
+            
+            <!-- Mostrar áreas -->
             <div class="dashboard2">
                 <?php foreach ($areas as $area): ?>
-                    <button class="area-btn" onclick="location.href='admin_dashboard.php?area_id=<?php echo $area['id']; ?>'">
+                    <button class="area-btn btn btn-outline-primary" onclick="location.href='admin_dashboard.php?area_id=<?php echo $area['id']; ?>'">
                         <?php echo htmlspecialchars($area['area']); ?>
                     </button>
                 <?php endforeach; ?>
             </div>
 
             <!-- Formulario para agregar nueva área -->
-            <form method="POST" class="add-area-form">
-                <input type="text" name="new_area" placeholder="Nombre de nueva área" required>
-                <textarea name="description" placeholder="Descripción del área" required></textarea> <!-- Campo para descripción -->
-                <button type="submit" class="add-area">Agregar Área</button>
-            </form>
+            <div class="container mt-5">
+                <form method="POST" class="add-area-form">
+                    <div class="mb-3">
+                        <label for="new_area" class="form-label">Nombre del Área</label>
+                        <input type="text" name="new_area" id="new_area" class="form-control" placeholder="Nombre de nueva área" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Descripción del Área</label>
+                        <textarea name="description" id="description" class="form-control" placeholder="Descripción del área" required></textarea>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-custom">AGREGAR ÁREA</button>
+                    </div>
+                </form>
+            </div>
         </main>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
