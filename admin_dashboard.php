@@ -35,15 +35,15 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - AuroLuxe</title>
-    <link rel="stylesheet" href="assets/css/admin.css">
+    <link rel="stylesheet" href="assets/css/admin_dashboard.css">
 </head>
 <body>
     <!-- Admin Dashboard Section -->
-    <section id="admin-dashboard">
+    <section>
         <div class="container">
-            <h1>Bienvenido, <?php echo $_SESSION['name']; ?> (Administrador)</h1>
+            <h1>Bienvenido, <?php echo $_SESSION['name']; ?> .</h1>
 
-            <h2>Eventos de Caras</h2>
+            <h2>Actividad reciente </h2>
             <table>
                 <thead>
                     <tr>
@@ -83,7 +83,8 @@ try {
                 </tbody>
             </table>
 
-            <a href="logout.php">Cerrar sesión</a>
+            <a href="welcome.php">Regresar</a>
+            <a href="logout.php">Cerrar sesion</a>
         </div>
     </section>
 </body>

@@ -29,31 +29,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AuroLuxe Admin Dashboard</title>
+    <title>AuroLuxe Mainpage</title>
     <link rel="stylesheet" href="assets/css/welcome.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="assets/js/script.js"></script>
 </head>
 <body>
-    <div class="dashboard">
+    <div class="dashboard d-flex">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="profile text-center">
-                <img src="assets/images/Genericavatar.png" alt="User Avatar" class="avatar">
-                <p class="username"><?php echo $_SESSION['name']; ?></p>
+            <div class="profile text-center mb-4">
+                <img src="assets/images/Genericavatar.png" alt="User Avatar" class="avatar rounded-circle">
+                <p class="username"><?php echo htmlspecialchars($_SESSION['name']); ?></p>
             </div>
             <nav class="nav flex-column">
                 <div class="dropdown">
-                    <button class="btn botoncito dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Usuario Administrador
+                <button class="btn botoncito dropdown-toggle" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        Accesibilidad
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">AdminUser</a></li>
+                    <li>
+                    </li> <a class="dropdown-item" href="addform.php">Agregar usuario</a>
+                        </li>
+                        <li><a class="dropdown-item" href="logout.php">Cerrar sesión</a></li>
                     </ul>
                 </div>
             </nav>
@@ -61,22 +65,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
         </aside>
 
         <!-- Main Content -->
-        <main class="main">
-            <p>ÁREAS</p>
+        <main class="main flex-grow-1 p-4">
+            <p>Áreas</p>
             
             <!-- Mostrar áreas -->
-            <div class="dashboard2">
+            <div class="dashboard2 text-center">
                 <?php foreach ($areas as $area): ?>
-                    <div class="dropdown d-inline-block">
+                    <div class="d-inline-block text-center me-3">
+                        <!-- Botón principal del área -->
                         <button 
-                            class="btn btn-outline-primary" 
-                            type="button" 
-                            id="<?php echo $area['id']; ?>" 
-                            aria-expanded="false"
+                            class="btn btn-outline-primary mb-2" 
+                            id="area-<?php echo $area['id']; ?>" 
                             onclick="location.href='admin_dashboard.php?area_id=<?php echo $area['id']; ?>'">
                             <?php echo htmlspecialchars($area['area']); ?>
                         </button>
+                        <!-- Botones de encender/apagar -->
+                        <div class="botones">
+                            <button
+                                class="btn btn-sm btn-success me-1"
+                                onclick="showNotification('<?php echo $area['area']; ?>', 'Luz encendida', 'success')">
+                                Encender
+                            </button>
+                            <button
+                                class="btn btn-sm btn-danger"
+                                onclick="showNotification('<?php echo $area['area']; ?>', 'Luz apagada', 'danger')">
+                                Apagar
+                            </button>
                         </div>
+                    </div>
                 <?php endforeach; ?>
             </div>
 
@@ -92,12 +108,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
                         <textarea name="description" id="description" class="form-control" placeholder="Descripción del área" required></textarea>
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-custom">AGREGAR ÁREA</button>
+                        <button type="submit" class="btn btn-primary">AGREGAR ÁREA</button>
                     </div>
                 </form>
             </div>
         </main>
     </div>
+    <!-- Contenedor de notificaciones -->
+<div class="toast-container position-fixed bottom-0 end-0 p-3"></div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
