@@ -1,6 +1,8 @@
 <?php
 require 'config.php';
 
+$success_message = ''; // Variable para almacenar el mensaje de éxito
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Capture the form data
     $name = $_POST['name'];
@@ -27,7 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Prepare the SQL statement to insert user data
         $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
         $stmt->execute([$name, $email, $hashed_password, strtolower($role)]);
-        echo "Registro exitoso. <a href='login.php'>Inicia sesión aquí</a>";
+        
+        // Set success message if registration is successful
+        $success_message = "Registro exitoso. <a href='login.php'>Inicia sesión aquí</a>";
     } catch (PDOException $e) {
         if ($e->getCode() === '23000') { // Code for duplicate entry (email already exists)
             echo "El correo ya está registrado.";
@@ -53,7 +57,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <img src="assets/images/GenericAvatar.png" alt="avatar" class="avatar">
             <h2>Sign Up</h2>
-            <!-- Updated form action to submit data to signup.php -->
+
+            <!-- Mostrar el mensaje de éxito si está disponible -->
+            <?php if ($success_message): ?>
+                <div class="success-message">
+                    <?php echo $success_message; ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Formulario de registro -->
             <form action="signup.php" method="POST">
                 <input type="text" name="name" placeholder="Full Name" required>
                 <input type="email" name="email" placeholder="Email Address" required>
