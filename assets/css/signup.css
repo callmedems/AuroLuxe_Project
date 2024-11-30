@@ -116,8 +116,8 @@ button:active {
   }
 
           /* Estilo para la caja de mensaje de éxito */
-.success-message {
-    background-color: #4CAF50; /* Verde */
+.message {
+    background-color: #635290;
     color: white;
     padding: 15px;
     margin: 20px 0;
@@ -126,11 +126,17 @@ button:active {
     text-align: center;
 }
 
-.success-message a {
+.message a {
     color: #fff;
     text-decoration: underline;
 }
 
-.success-message a:hover {
+.message a:hover {
     color: #f1f1f1;
+}
+
+/* Estilo para el mensaje de error */
+.message.error {
+    background-color: #f44336; /* Rojo */
+    color: white;
 }

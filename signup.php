@@ -2,6 +2,7 @@
 require 'config.php';
 
 $success_message = ''; // Variable para almacenar el mensaje de éxito
+$error_message = ''; // Variable para almacenar el mensaje de error
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Capture the form data
@@ -13,30 +14,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validate that passwords match
     if ($password !== $confirm_password) {
-        die("Las contraseñas no coinciden.");
-    }
+        $error_message = "Las contraseñas no coinciden.";
+    } else {
+        // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-    // Hash the password
-    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
-
-    // Validate that the role is valid
-    $valid_roles = ['admin', 'user'];
-    if (!in_array(strtolower($role), $valid_roles)) {
-        die("Rol no válido.");
-    }
-
-    try {
-        // Prepare the SQL statement to insert user data
-        $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$name, $email, $hashed_password, strtolower($role)]);
-        
-        // Set success message if registration is successful
-        $success_message = "Registro exitoso. <a href='login.php'>Inicia sesión aquí</a>";
-    } catch (PDOException $e) {
-        if ($e->getCode() === '23000') { // Code for duplicate entry (email already exists)
-            echo "El correo ya está registrado.";
+        // Validate that the role is valid
+        $valid_roles = ['admin', 'user'];
+        if (!in_array(strtolower($role), $valid_roles)) {
+            $error_message = "Rol no válido.";
         } else {
-            echo "Error: " . $e->getMessage();
+            try {
+                // Prepare the SQL statement to insert user data
+                $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+                $stmt->execute([$name, $email, $hashed_password, strtolower($role)]);
+                
+                // Set success message if registration is successful
+                $success_message = "Registro exitoso. <a href='login.php'>Inicia sesión aquí</a>";
+            } catch (PDOException $e) {
+                if ($e->getCode() === '23000') { // Code for duplicate entry (email already exists)
+                    $error_message = "El correo ya está registrado.";
+                } else {
+                    $error_message = "Error: " . $e->getMessage();
+                }
+            }
         }
     }
 }
@@ -60,8 +61,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Mostrar el mensaje de éxito si está disponible -->
             <?php if ($success_message): ?>
-                <div class="success-message">
+                <div class="message">
                     <?php echo $success_message; ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Mostrar el mensaje de error si está disponible -->
+            <?php if ($error_message): ?>
+                <div class="message error">
+                    <?php echo $error_message; ?>
                 </div>
             <?php endif; ?>
 
