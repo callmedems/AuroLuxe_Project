@@ -4,7 +4,7 @@ session_start();
 require 'config.php';
 
 if ($_SESSION['role'] !== 'admin') {
-    header('Location: index.php'); // Si no es admin, redirigir al index
+    header('Location: login.php'); // Si no es admin, redirigir al login
     exit;
 }
 

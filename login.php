@@ -17,8 +17,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['name'] = $user['name'];
             $_SESSION['role'] = $user['role'];
-            // Redirect to the welcome page (you may use header() for this)
-            header('Location: welcome.php');
+
+            //lets redirect according to the role
+            if($user['role'] == 'admin') {
+                header('Location: welcome.php');
+            } else {
+                header('Location: welcome_user.php');
+            }
             exit;
         } else {
             $login_error_message = "Correo o contraseña incorrectos.";
