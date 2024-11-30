@@ -16,9 +16,8 @@ body {
 }
 
 .logo {
-    width: 300px;
-    position: absolute;
-    top: -30%;
+    width: 40%;
+    position: relative;
 }
 
 #home .container {
@@ -34,8 +33,7 @@ body {
 
 #home h1 {
     color: #fff;
-    font-size: 40px;
-    margin-top: 100px;
+    font-size: 70px;
 }
 
 #home button {
