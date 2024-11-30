@@ -31,21 +31,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Registro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuroLuxe SignUp</title>
+    <link rel="stylesheet" href="assets/css/signup.css">
 </head>
+
 <body>
-    <h1>Registro</h1>
-    <form method="POST">
-        <label>Nombre completo: <input type="text" name="name" required></label><br>
-        <label>Correo electrónico: <input type="email" name="email" required></label><br>
-        <label>Contraseña: <input type="password" name="password" required></label><br>
-        <label>Rol:
-            <select name="role" required>
-                <option value="user">Usuario</option>
-                <option value="admin">Administrador</option>
-            </select>
-        </label><br>
-        <button type="submit">Registrarse</button>
-    </form>
+    <!-- Signup Section -->
+    <section id="signup">
+        <div class="container">
+            <img src="assets/images/GenericAvatar.png" alt="avatar" class="avatar">
+            <h2>Sign Up</h2>
+            <form action="log_data.php" method="POST">
+                <input type="text" name="name" placeholder="Full Name" required>
+                <input type="email" name="email" placeholder="Email Address" required>
+                <select name="role" required>
+                    <option value="" disabled selected>Choose a role</option>
+                    <option value="Admin">Admin</option>
+                    <option value="User">User</option>
+                </select>
+                <input type="password" name="password" placeholder="Create Password" required>
+                <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+                <button type="submit">Register</button>
+            </form>
+            <p>Already a member? <a href="login.html" class="button">LOGIN</a></p>
+        </div>
+    </section>
+
 </body>
 </html>
