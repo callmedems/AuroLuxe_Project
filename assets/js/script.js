@@ -8,7 +8,7 @@ function navigateTo(page) {
          * @param {string} message - El mensaje a mostrar.
          * @param {string} type - Tipo de notificación ('success' o 'danger').
          */
- function showNotification(areaName, message, type) {
+function showNotification(areaName, message, type) {
     const toastContainer = document.querySelector('.toast-container');
 
     // Crear el HTML de la notificación

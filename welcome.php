@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
 
     // Insertar el nuevo área en la base de datos
     try {
-        $stmt = $pdo->prepare("INSERT INTO areas (area, description) VALUES (?, ?)"); // Incluir 'description'
+        $stmt = $pdo->prepare("INSERT INTO areas (area, description) VALUES (?, ?)");
         $stmt->execute([$new_area, $description]);
         header('Location: welcome.php'); // Redirigir para evitar reenvío de formulario
         exit;
@@ -29,15 +29,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AuroLuxe Mainpage</title>
+    <title>AuroLuxe Admin Dashboard</title>
     <link rel="stylesheet" href="assets/css/welcome.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="assets/js/script.js"></script>
 </head>
 <body>
     <div class="dashboard">
@@ -62,14 +62,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
 
         <!-- Main Content -->
         <main class="main">
-            <h1 class="text-center">ÁREAS</h1>
+            <p>ÁREAS</p>
             
             <!-- Mostrar áreas -->
             <div class="dashboard2">
                 <?php foreach ($areas as $area): ?>
-                    <button class="area-btn btn btn-outline-primary" onclick="location.href='admin_dashboard.php?area_id=<?php echo $area['id']; ?>'">
-                        <?php echo htmlspecialchars($area['area']); ?>
-                    </button>
+                    <div class="dropdown d-inline-block">
+                        <button 
+                            class="btn btn-outline-primary" 
+                            type="button" 
+                            id="<?php echo $area['id']; ?>" 
+                            aria-expanded="false"
+                            onclick="location.href='admin_dashboard.php?area_id=<?php echo $area['id']; ?>'">
+                            <?php echo htmlspecialchars($area['area']); ?>
+                        </button>
+                        </div>
                 <?php endforeach; ?>
             </div>
 
@@ -91,7 +98,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_area'])) {
             </div>
         </main>
     </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
