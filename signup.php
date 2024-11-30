@@ -87,6 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <button type="submit">Register</button>
             </form>
             <p>Already a member? <a href="login.php" class="button">LOGIN</a></p>
+            <!-- Flecha de regreso al índice -->
+            <a href="index.php" class="back-arrow">&#8592; Volver al inicio</a>
         </div>
     </section>
 </body>

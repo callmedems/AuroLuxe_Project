@@ -113,6 +113,7 @@ select option {
     margin: 10px 0;
     cursor: pointer;
     font-size: 1em;
+    font-weight: bold;
     text-decoration: none;
   }
   
@@ -122,4 +123,19 @@ select option {
 
 .button:active {
     transform: translateY(0);
+}
+
+/* Estilo para la flecha de regreso */
+.back-arrow {
+    display: inline-block;
+    margin-top: 5%;
+    font-size: 16px;
+    color: #F9D5D2;  /* Color azul */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.back-arrow:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }

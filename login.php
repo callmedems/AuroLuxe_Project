@@ -58,8 +58,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" name="password" placeholder="Enter password" required>
                 <button type="submit">Next</button>
             </form>
-
             <p>New to AuroLuxe? <a href="signup.php" class="button">SIGN UP!</a></p>
+            <!-- Flecha de regreso al índice -->
+            <a href="index.php" class="back-arrow">&#8592; Volver al inicio</a>
         </div>
     </section>
 </body>
