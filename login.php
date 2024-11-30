@@ -2,6 +2,8 @@
 require 'config.php';
 session_start();
 
+$login_error_message = ''; // To hold any login error message
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -15,28 +17,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['name'] = $user['name'];
             $_SESSION['role'] = $user['role'];
-            echo "Inicio de sesión exitoso. <a href='welcome.php'>Ir a la página de bienvenida</a>";
+            // Redirect to the welcome page (you may use header() for this)
+            header('Location: welcome.php');
+            exit;
         } else {
-            echo "Correo o contraseña incorrectos.";
+            $login_error_message = "Correo o contraseña incorrectos.";
         }
     } catch (PDOException $e) {
-        echo "Error: " . $e->getMessage();
+        $login_error_message = "Error: " . $e->getMessage();
     }
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Iniciar sesión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuroLuxe LogIn</title>
+    <link rel="stylesheet" href="assets/css/login.css">
 </head>
+
 <body>
-    <h1>Iniciar sesión</h1>
-    <form method="POST">
-        <label>Correo electrónico: <input type="email" name="email" required></label><br>
-        <label>Contraseña: <input type="password" name="password" required></label><br>
-        <button type="submit">Iniciar sesión</button>
-    </form>
+    <!-- Login Section -->
+    <section id="login">
+        <div class="container">
+            <img src="assets/images/GenericAvatar.png" alt="avatar" class="avatar">
+            <h2>Sign In</h2>
+
+            <!-- Show the login error message if available -->
+            <?php if ($login_error_message): ?>
+                <div class="message error">
+                    <?php echo $login_error_message; ?>
+                </div>
+            <?php endif; ?>
+
+            <!-- Login Form -->
+            <form id="loginForm" method="POST" action="login.php">
+                <input type="email" name="email" placeholder="Email address" required>
+                <input type="password" name="password" placeholder="Enter password" required>
+                <button type="submit">Next</button>
+            </form>
+
+            <p>New to AuroLuxe? <a href="signup.php" class="button">SIGN UP!</a></p>
+        </div>
+    </section>
 </body>
 </html>
