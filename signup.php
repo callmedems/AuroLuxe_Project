@@ -5,7 +5,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-    $role = 'user'; // Por defecto, se asigna el rol "user".
+    $role = $_POST['role'];
+
+    // Validar que el rol sea válido
+    $valid_roles = ['admin', 'user'];
+    if (!in_array($role, $valid_roles)) {
+        die("Rol no válido.");
+    }
 
     try {
         $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
@@ -33,6 +39,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <label>Nombre completo: <input type="text" name="name" required></label><br>
         <label>Correo electrónico: <input type="email" name="email" required></label><br>
         <label>Contraseña: <input type="password" name="password" required></label><br>
+        <label>Rol:
+            <select name="role" required>
+                <option value="user">Usuario</option>
+                <option value="admin">Administrador</option>
+            </select>
+        </label><br>
         <button type="submit">Registrarse</button>
     </form>
 </body>
