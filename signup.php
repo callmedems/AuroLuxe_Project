@@ -2,23 +2,34 @@
 require 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Capture the form data
     $name = $_POST['name'];
     $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
     $role = $_POST['role'];
 
-    // Validar que el rol sea válido
+    // Validate that passwords match
+    if ($password !== $confirm_password) {
+        die("Las contraseñas no coinciden.");
+    }
+
+    // Hash the password
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    // Validate that the role is valid
     $valid_roles = ['admin', 'user'];
-    if (!in_array($role, $valid_roles)) {
+    if (!in_array(strtolower($role), $valid_roles)) {
         die("Rol no válido.");
     }
 
     try {
+        // Prepare the SQL statement to insert user data
         $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$name, $email, $password, $role]);
+        $stmt->execute([$name, $email, $hashed_password, strtolower($role)]);
         echo "Registro exitoso. <a href='login.php'>Inicia sesión aquí</a>";
     } catch (PDOException $e) {
-        if ($e->getCode() === '23000') { // Código de error para violación de clave única
+        if ($e->getCode() === '23000') { // Code for duplicate entry (email already exists)
             echo "El correo ya está registrado.";
         } else {
             echo "Error: " . $e->getMessage();
@@ -42,21 +53,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <div class="container">
             <img src="assets/images/GenericAvatar.png" alt="avatar" class="avatar">
             <h2>Sign Up</h2>
-            <form action="log_data.php" method="POST">
+            <!-- Updated form action to submit data to signup.php -->
+            <form action="signup.php" method="POST">
                 <input type="text" name="name" placeholder="Full Name" required>
                 <input type="email" name="email" placeholder="Email Address" required>
                 <select name="role" required>
                     <option value="" disabled selected>Choose a role</option>
-                    <option value="Admin">Admin</option>
-                    <option value="User">User</option>
+                    <option value="admin">Admin</option>
+                    <option value="user">User</option>
                 </select>
                 <input type="password" name="password" placeholder="Create Password" required>
                 <input type="password" name="confirm_password" placeholder="Confirm Password" required>
                 <button type="submit">Register</button>
             </form>
-            <p>Already a member? <a href="login.html" class="button">LOGIN</a></p>
+            <p>Already a member? <a href="login.php" class="button">LOGIN</a></p>
         </div>
     </section>
-
 </body>
 </html>
